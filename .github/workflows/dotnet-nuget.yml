@@ -26,8 +26,14 @@ jobs:
       - name: 🏗 Build Solution
         run: dotnet build --configuration Release --no-restore
 
-      - name: 📦 Pack NuGet Package
+      - name: 📦 Pack BlobSyncer NuGet Package
         run: dotnet pack src/BlobSyncer.Azure.BlobStorage/BlobSyncer.Azure.BlobStorage.csproj --configuration Release --output ./artifacts --property:PackageId=BlobSyncer
+
+      # - name: 📦 Pack BlobSyncer.AmazonS3 NuGet Package
+      #   run: dotnet pack src/BlobSyncer.Amazon.S3/BlobSyncer.Amazon.S3.csproj --configuration Release --output ./artifacts --property:PackageId=BlobSyncer.AmazonS3
+
+      # - name: 📦 Pack BlobSyncer.AISearch NuGet Package
+      #   run: dotnet pack src/BlobSyncer.Azure.AISearch/BlobSyncer.Azure.AISearch.csproj --configuration Release --output ./artifacts --property:PackageId=BlobSyncer.AISearch
 
       - name: 📂 Upload NuGet Package as an Artifact
         uses: actions/upload-artifact@v4

@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+	<PropertyGroup>
+		<PackageId>BlobSyncer.AISearch</PackageId>
+		<Version>0.1.0</Version>
+		<!-- This can be overridden dynamically -->
+		<Authors>Vitor Paulino</Authors>
+		<Company>IngenuityWorks Lda</Company>
+		<Description>A tool to sync and download files from Azure Blob Storage to AI Search.</Description>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<RepositoryUrl>https://github.com/vpaulino/blobsyncer</RepositoryUrl>
+	</PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Azure.AI.OpenAI" Version="2.1.0" />
+    <PackageReference Include="Azure.Search.Documents" Version="11.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BlobSyncer.Azure.BlobStorage\BlobSyncer.Azure.BlobStorage.csproj" />
+  </ItemGroup>
+
+</Project>

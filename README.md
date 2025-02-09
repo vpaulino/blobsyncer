@@ -60,9 +60,12 @@
    cd BlobSyncer.Azure.BlobStorage
 
 ## 📌  Roadmap
-  - [ ] Add support for syncing files to another Azure Blob Storage.
+  - [X] Add support for syncing files to another Azure Blob Storage.
+   - [X] Add support for syncing files to Amazon S3.
+	- [X] Add support for syncing files to Azure Search AI by generate embendings.
+	- [ ] Add Support to process multiple destinations different strategies to orchestrate destinations
    - [ ] Add support to send notifications to a pubsub channel everytime one container is updated from a syncronization
-  - [ ] Add logging and monitoring for better observability.
+  
 
 
 ## 📜 License

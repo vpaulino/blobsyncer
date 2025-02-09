@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+	<PropertyGroup>
+		<PackageId>BlobSyncer.AmazonS3</PackageId>
+		<Version>0.2.0</Version>
+		<!-- This can be overridden dynamically -->
+		<Authors>Vitor Paulino</Authors>
+		<Company>IngenuityWorks Lda</Company>
+		<Description>A tool to sync and download files from Azure Blob Storage ToAmazonS3.</Description>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<RepositoryUrl>https://github.com/vpaulino/blobsyncer</RepositoryUrl>
+	</PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="AWSSDK.S3" Version="3.7.414.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BlobSyncer.Azure.BlobStorage\BlobSyncer.Azure.BlobStorage.csproj" />
+  </ItemGroup>
+
+</Project>
