@@ -49,52 +49,14 @@
 
         static async Task Main(string[] args)
         {
-
             // Build the host using the default builder.
-            using IHost host = Host.CreateDefaultBuilder(args)
-                .ConfigureAppConfiguration((context, config) =>
-                {
-                    var env = context.HostingEnvironment;
+            IHost host;
+            ILogger<AzureBlobDownloader> logger;
+            string? sourceConnectionString, rootFolder;
+            string[] containerNames;
+            List<Task> tasksExecuting;
 
-                    // Load configuration sources
-                    config
-                        .SetBasePath(AppContext.BaseDirectory) // Optional: Set base path
-                        .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
-                        .AddUserSecrets<Program>() // ✅ Enable User Secrets
-                        .AddEnvironmentVariables()
-                        .AddCommandLine(args);
-                }) 
-                .Build();
-
-           
-            // Retrieve the logger factory (which gives you access to logging providers)
-            var loggerFactory = host.Services.GetRequiredService<ILoggerFactory>();
-            var logger = loggerFactory.CreateLogger<AzureBlobDownloader>();
-
-            logger.LogInformation("Application has started.");
-            
-            // If you specifically want to fetch the logger providers, you can resolve them as follows:
-            var loggerProviders = host.Services.GetServices<ILoggerProvider>();
-
-            var configuration = host.Services.GetRequiredService<IConfiguration>();
-            var sourceConnectionString = configuration.GetConnectionString("blobStorage");
-
-
-            // Create the parser and parse the command-line arguments.
-            var parser = new CommandLineParser();
-
-            parser.AddParameter("--names", ParseNames)
-                  .AddParameter("--destination", ParseDestination);
-
-            var arguments = parser.Parse(args); 
-
-              string[] containerNames = arguments.GetByName("names")?.Values; // Replace with your Blob Container Name
-            string rootFolder = arguments.GetByName("destination").Values.ElementAt(0); // Replace with your desired local folder path
-
-            List<Task> tasksExecuting = new List<Task>();
-
-            
+            Setup(args, out host, out logger, out sourceConnectionString, out containerNames, out rootFolder, out tasksExecuting);
 
             AzureBlobDownloader azureBlobDownloader = new AzureBlobDownloader(sourceConnectionString, logger);
 
@@ -109,6 +71,51 @@
             await Task.WhenAll(tasksExecuting);
 
             Console.WriteLine("Download completed.");
+        }
+
+        private static void Setup(string[] args, out IHost host, out ILogger<AzureBlobDownloader> logger, out string? sourceConnectionString, out string[] containerNames, out string rootFolder, out List<Task> tasksExecuting)
+        {
+            host = Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((context, config) =>
+                {
+                    var env = context.HostingEnvironment;
+
+                    // Load configuration sources
+                    config
+                        .SetBasePath(AppContext.BaseDirectory) // Optional: Set base path
+                        .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
+                        .AddUserSecrets<Program>() // ✅ Enable User Secrets
+                        .AddEnvironmentVariables()
+                        .AddCommandLine(args);
+                })
+                .Build();
+
+
+            // Retrieve the logger factory (which gives you access to logging providers)
+            var loggerFactory = host.Services.GetRequiredService<ILoggerFactory>();
+            logger = loggerFactory.CreateLogger<AzureBlobDownloader>();
+            logger.LogInformation("Application has started.");
+
+            // If you specifically want to fetch the logger providers, you can resolve them as follows:
+            var loggerProviders = host.Services.GetServices<ILoggerProvider>();
+
+            var configuration = host.Services.GetRequiredService<IConfiguration>();
+            sourceConnectionString = configuration.GetConnectionString("blobStorage");
+
+
+            // Create the parser and parse the command-line arguments.
+            var parser = new CommandLineParser();
+
+            parser.AddParameter("--names", ParseNames)
+                  .AddParameter("--destination", ParseDestination);
+
+            var arguments = parser.Parse(args);
+
+            containerNames = arguments.GetByName("names")?.Values;
+            rootFolder = arguments.GetByName("destination").Values.ElementAt(0);
+            tasksExecuting = new List<Task>();
+
         }
     }
 }
