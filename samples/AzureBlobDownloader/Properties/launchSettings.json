@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "AzureBlobDownloader": {
+      "commandName": "Project",
+      "commandLineArgs": "--names users,website --destination C:\\Sarkis\\"
+    }
+  }
+}
