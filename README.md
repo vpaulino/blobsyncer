@@ -13,6 +13,7 @@
 
 ## 📂 Project Structure
 
+```
 📦 BlobSyncer.Azure.BlobStorage
 │── 📁 .github
 │   ├── 📁 workflows
@@ -36,7 +37,7 @@
 │   ├── 📁 SampleApp2
 │── 📄 BlobSyncer.Azure.BlobStorage.sln  # Solution file
 │── 📄 README.md
-
+```
 
 
 
