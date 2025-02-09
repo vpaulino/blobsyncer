@@ -30,7 +30,7 @@ jobs:
         run: dotnet pack src/BlobSyncer.Azure.BlobStorage/BlobSyncer.Azure.BlobStorage.csproj --configuration Release --output ./artifacts --property:PackageId=BlobSyncer
 
       - name: 📂 Upload NuGet Package as an Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: nuget-package
           path: ./artifacts/*.nupkg
@@ -42,7 +42,7 @@ jobs:
 
     steps:
       - name: 📥 Download NuGet Package
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: nuget-package
           path: ./artifacts
