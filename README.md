@@ -13,20 +13,32 @@
 
 ## 📂 Project Structure
 
-BlobSyncer.Azure.BlobStorage 
-│── Dependencies 
-│── Channels 
-│ ├── Readers 
-│ │ ├── FileSystem 
-│ │ │ ├── FileSystemDestinationHandler.cs # Handles writing to the filesystem 
-│ │ ├── IChannelReader.cs # Interface for reading from a channel 
-│ │ ├── IDestinationHandler.cs # Interface for handling different sync destinations 
-│ │ ├── PageBlobItemChannelReader.cs # Reads Page Blob items from a channel 
-│ ├── Writers 
-│ │ ├── IChannelWriter.cs # Interface for writing to a channel 
-│ │ ├── PageBlobItemChannelWriter.cs # Writes Page Blob items to a channel 
-│── AzureBlobDownloader.cs # Core component handling Azure Blob downloads 
-│── DownloadSettings.cs # Configuration settings for downloads
+```
+📦 BlobSyncer.Azure.BlobStorage
+│── 📁 .github
+│   ├── 📁 workflows
+│   │   ├── 📄 dotnet-build.yml    # GitHub Actions pipeline for CI/CD
+│── 📁 src                        # Library projects
+│   ├── 📁 BlobSyncer.Azure.BlobStorage
+│   │   ├── 📁 Channels
+│   │   │   ├── 📁 Readers
+│   │   │   │   ├── 📁 FileSystem
+│   │   │   │   │   ├── 📄 FileSystemDestinationHandler.cs
+│   │   │   │   ├── 📄 IChannelReader.cs
+│   │   │   │   ├── 📄 IDestinationHandler.cs
+│   │   │   │   ├── 📄 PageBlobItemChannelReader.cs
+│   │   │   ├── 📁 Writers
+│   │   │   │   ├── 📄 IChannelWriter.cs
+│   │   │   │   ├── 📄 PageBlobItemChannelWriter.cs
+│   │   ├── 📄 AzureBlobDownloader.cs
+│   │   ├── 📄 DownloadSettings.cs
+│── 📁 samples                    # Console applications
+│   ├── 📁 SampleApp1              # Example console app using BlobSyncer
+│   ├── 📁 SampleApp2
+│── 📄 BlobSyncer.Azure.BlobStorage.sln  # Solution file
+│── 📄 README.md
+```
+
 
 
 ---
