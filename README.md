@@ -4,6 +4,15 @@
 
 ---
 
+## Build Status 
+
+![Build Status](https://github.com/vpaulino/blobsyncer/actions/workflows/dotnet-build.yml/badge.svg)
+
+## Nuget 
+
+[![NuGet](https://img.shields.io/nuget/v/BlobSyncer.svg)](https://www.nuget.org/packages/BlobSyncer/)
+
+
 ## 🚀 Features
 - **Download files from Azure Blob Storage** and save them to the local filesystem.
 - **Extendable architecture** for adding support to sync files to different destinations.
